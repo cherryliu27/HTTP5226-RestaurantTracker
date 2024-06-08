@@ -1,0 +1,16 @@
+﻿﻿@model IEnumerable<RestaurantTracker.Models.RestaurantDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+@foreach (var restaurant in Model)
+{
+    <h3><a href="Details/@restaurant.RestaurantId">@restaurant.RestaurantName</a></h3>
+    <div>Restaurant ID: @restaurant.RestaurantId</div>
+    <div>Restaurant Type: @restaurant.RestaurantType\</div>
+    <div>Cuisine: @restaurant.Cuisine</div>
+    <div>Budget: @restaurant.Budget</div>
+}
+

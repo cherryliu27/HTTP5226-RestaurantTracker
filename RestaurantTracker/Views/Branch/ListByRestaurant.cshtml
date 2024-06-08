@@ -1,0 +1,21 @@
+﻿﻿@model IEnumerable<RestaurantTracker.Models.BranchDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of @ViewData["RestaurantName"] Branches</h2>
+<p><a href="/Branch/Add/@ViewData["id"]">Add New Branch</a></p>
+<p><a href="/Restaurant/List">View List of Restaurants</a></p>
+
+@foreach (var branch in Model)
+{
+    <h2><a href="/Restaurant/Details/@branch.RestaurantId">@branch.RestaurantName</a></h2>
+    <div>Restaurant ID: @branch.RestaurantId</div>
+    <div>Branch ID: @branch.BranchId</div>
+    <div>Status: @branch.Status</div>
+    <div>Review: @branch.Review</div>
+    <div>Location: <a href="/Branch/Details/@branch.BranchId">@branch.Location</a></div>
+    <div>Address: @branch.Address</div>
+
+}
+

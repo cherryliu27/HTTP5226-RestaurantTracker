@@ -1,0 +1,22 @@
+﻿﻿@model RestaurantTracker.Models.BranchDto
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3>@Model.RestaurantName</h3>
+<div>Branch ID: @Model.BranchId</div>
+<div>Restaurant ID: @Model.RestaurantId</div>
+<div>Status: @Model.Status</div>
+<div>Review: @Model.Review</div>
+<div>Location: @Model.Location</div>
+<div>Address: @Model.Address</div>
+
+
+<div><a href="/Branch/Edit/@Model.BranchId">Update Branch</a> | <a href="/Branch/DeleteConfirm/@Model.BranchId">Delete Branch</a> | <a href="/Branch/List">Back</a></div>
+
+<!--<form method="POST" action="/Branch/Add/@Model.RestaurantId" id="branchForm">
+    <input type="hidden" name="RestaurantId" value="@Model.RestaurantId" />
+    <button type="submit">Add Branch</button>
+</form>-->
