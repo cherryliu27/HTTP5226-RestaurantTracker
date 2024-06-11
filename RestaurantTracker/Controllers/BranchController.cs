@@ -24,7 +24,7 @@ namespace RestaurantTracker.Controllers
         // GET: Branch/List
         public ActionResult List()
         {
-            //objective: communicate with our restaurant branch data api to retrieve a list of animals
+            //objective: communicate with our restaurant's branches data api to retrieve a list of branches
             //curl https://localhost:44355/api/restaurantdata/listrestaurants
 
             string url = "listbranches";
@@ -42,7 +42,7 @@ namespace RestaurantTracker.Controllers
         // GET: Branch/Details/1
         public ActionResult Details(int id)
         {
-            //objective: communicate with our restarurant branch data api to retrieve one animal
+            //objective: communicate with our restarurant branch data api to retrieve details of one single branch 
             //curl https://localhost:44355/api/restaurantdata/findbranch/{id}
 
             string url = "findbranch/" + id;
@@ -151,7 +151,7 @@ namespace RestaurantTracker.Controllers
         {
             Debug.WriteLine("the json payload is :");
             Debug.WriteLine(Branch.Location);
-            //objective: add a new animal into our system using the API
+            //objective: add a new branch into our system using the API
             //curl -H "Content-Type:application/json" -d @restaurant.json https://localhost:44355/api/branchdata/addbranch 
             string url = "addbranch";
 
@@ -166,7 +166,7 @@ namespace RestaurantTracker.Controllers
             HttpResponseMessage response = client.PostAsync(url, content).Result;
             if (response.IsSuccessStatusCode)
             {
-                // Deserialize the response to get the created restaurant with its ID
+                // Deserialize the response to get the created branch with its ID
                 var createdBranch = response.Content.ReadAsAsync<BranchDto>().Result;
                 // Redirect to the Details page of the newly created restaurant
                 return RedirectToAction("List");
@@ -219,7 +219,7 @@ namespace RestaurantTracker.Controllers
         // GET: Branch/ListByRestaurant
         public ActionResult ListByRestaurant(int id)
         {
-            //objective: communicate with our restaurant branch data api to retrieve a list of animals
+            //objective: communicate with our restaurant branch data api to retrieve a list of branches based on the restaurant
             //curl https://localhost:44355/api/restaurantdata/listbyrestaurant
 
             string url = "listbranchesbyrestaurant/"+ id;

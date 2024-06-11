@@ -9,7 +9,7 @@
 
 @foreach (var branch in Model)
 {
-    <h3><a href="/Restaurant/Details/@branch.RestaurantId">@branch.RestaurantName (@branch.Location)</a></h3>
+    <h3><a href="/Branch/Details/@branch.BranchId">@branch.RestaurantName (@branch.Location)</a></h3>
     <div>Restaurant ID: <a href="/Restaurant/Details/@branch.RestaurantId">@branch.RestaurantId</a></div>
     <div>Status: @branch.Status</div>
     <div>Review: @branch.Review</div>

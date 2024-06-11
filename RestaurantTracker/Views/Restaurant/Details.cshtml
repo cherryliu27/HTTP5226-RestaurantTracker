@@ -5,13 +5,15 @@
     ViewBag.Title = "Details";
 }
 
-<h2>@Model.RestaurantName</h2>
+<h2>Restaurant Details</h2>
+
+<h3>@Model.RestaurantName</h3>
 <div>Restaurant ID: @Model.RestaurantId</div>
 <div>Restaurant Type: @Model.RestaurantType</div>
 <div>Cuisine: @Model.Cuisine</div>
 <div>Budget: $@Model.Budget</div>
 
-<div><a href="/Restaurant/Edit/@Model.RestaurantId">Update Restaurants</a> | <a href="/Restaurant/DeleteConfirm/@Model.RestaurantId">Delete Restaurant</a> | <a href="/Branch/List">Back</a></div>
+<div><a href="/Restaurant/Edit/@Model.RestaurantId">Update Restaurants</a> | <a href="/Restaurant/DeleteConfirm/@Model.RestaurantId">Delete Restaurant</a> | <a href="/Restaurant/List">Back to Restaurant List</a></div>
 <form method="POST" action="/Branch/Add/@Model.RestaurantId" id="branchForm">
     <input type="hidden" name="RestaurantId" value="@Model.RestaurantId" />
     <button type="submit">Add Branch</button>

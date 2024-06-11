@@ -3,13 +3,15 @@
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
+<h2>List of Restaurants</h2>
+<p><a href="/Restaurant/Add">Add New Restaurant</a></p>
+<p><a href="/Branch/List">List of All Restaurant branches</a></p>
 
 @foreach (var restaurant in Model)
 {
     <h3><a href="Details/@restaurant.RestaurantId">@restaurant.RestaurantName</a></h3>
     <div>Restaurant ID: @restaurant.RestaurantId</div>
-    <div>Restaurant Type: @restaurant.RestaurantType\</div>
+    <div>Restaurant Type: @restaurant.RestaurantType</div>
     <div>Cuisine: @restaurant.Cuisine</div>
     <div>Budget: @restaurant.Budget</div>
 }

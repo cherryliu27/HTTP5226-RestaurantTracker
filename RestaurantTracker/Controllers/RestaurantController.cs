@@ -25,7 +25,7 @@ namespace RestaurantTracker.Controllers
         // GET: Restaurant/List
         public ActionResult List()
         {
-            //objective: communicate with our restaurant data api to retrieve a list of animals
+            //objective: communicate with our restaurant data api to retrieve a list of restaurants
             //curl https://localhost:44355/api/restaurantdata/listrestaurants
 
             string url = "listrestaurants";
@@ -43,7 +43,7 @@ namespace RestaurantTracker.Controllers
         // GET: Restaurant/Details/1
         public ActionResult Details(int id)
         {
-            //objective: communicate with our restarurant data api to retrieve one animal
+            //objective: communicate with our restarurant data api to retrieve one restaurant
             //curl https://localhost:44355/api/restaurantdata/findrestaurant/{id}
 
             string url = "findrestaurant/" + id;

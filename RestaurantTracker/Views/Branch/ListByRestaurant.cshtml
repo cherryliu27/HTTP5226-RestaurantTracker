@@ -3,19 +3,20 @@
     ViewBag.Title = "List";
 }
 
-<h2>List of @ViewData["RestaurantName"] Branches</h2>
+<h2>List of Branches</h2>
 <p><a href="/Branch/Add/@ViewData["id"]">Add New Branch</a></p>
 <p><a href="/Restaurant/List">View List of Restaurants</a></p>
 
 @foreach (var branch in Model)
 {
-    <h2><a href="/Restaurant/Details/@branch.RestaurantId">@branch.RestaurantName</a></h2>
+    <h2><a href="/Branch/Details/@branch.BranchId">@branch.RestaurantName (@branch.Location)</a></h2>
     <div>Restaurant ID: @branch.RestaurantId</div>
     <div>Branch ID: @branch.BranchId</div>
     <div>Status: @branch.Status</div>
     <div>Review: @branch.Review</div>
-    <div>Location: <a href="/Branch/Details/@branch.BranchId">@branch.Location</a></div>
+    <div>Location: @branch.Location</div>
     <div>Address: @branch.Address</div>
 
 }
 
+<a href="/Restaurant/Details/@ViewData["id"]">Back</a>
