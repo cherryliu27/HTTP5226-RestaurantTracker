@@ -28,4 +28,5 @@ namespace RestaurantTracker.Models
         public string Cuisine { get; set; }
         public string Budget { get; set; }
     }
+
 }

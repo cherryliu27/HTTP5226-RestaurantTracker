@@ -5,9 +5,38 @@
 }
 
 
-<h2>Edit Restaurant</h2>
+<h2>Update @Model.RestaurantName</h2>
 
-<form method="POST" action="/Restaurant/Update/@Model.RestaurantId">
+<form style="margin-top:1.5rem" method="POST" action="/Restaurant/Update/@Model.RestaurantId">
+    <div style="display:none">
+        <input type="text" name="RestaurantId" value="@Model.RestaurantId" />
+    </div>
+    <div class="form-group">
+        <label for="name">Restaurant Name:</label>
+        <input type="text" name="RestaurantName" class="form-control" id="name" value="@Model.RestaurantName">
+    </div>
+    <div class="form-group">
+        <label for="type">Restaurant Type:</label>
+        <input type="text" name="RestaurantType" class="form-control" id="type" value="@Model.RestaurantType">
+    </div>
+    <div class="form-group">
+        <label for="type">Cuisine:</label>
+        <input type="text" name="cuisine" class="form-control" id="cuisine" value="@Model.Cuisine">
+    </div>
+    <div style="margin-bottom:2rem;"class="form-group">
+        <label for="type">Budget ($):</label>
+        <input type="text" name="budget" class="form-control" id="budget" value="@Model.Budget">
+    </div>
+
+        <button style="width:7rem" type="submit" class="btn btn-primary" value="update">Update</button>
+        <a style="width: 5.5rem; margin-left:0.2rem" href="/Restaurant/Details/@Model.RestaurantId" class="btn btn-outline-secondary" role="button">Cancel</a>
+</form>
+
+
+
+
+
+@*<form method="POST" action="/Restaurant/Update/@Model.RestaurantId">
     <div style="display:none">
         <input type="text" name="RestaurantId" value="@Model.RestaurantId" />
     </div>
@@ -34,4 +63,4 @@
 
 </form>
 
-<a href="/Restaurant/Details/@Model.RestaurantId">Cancel</a>
+<a href="/Restaurant/Details/@Model.RestaurantId">Cancel</a>*@

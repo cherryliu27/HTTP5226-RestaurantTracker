@@ -22,12 +22,18 @@ namespace RestaurantTracker.Controllers
         }
 
         // GET: Branch/List
-        public ActionResult List()
+        public ActionResult List(string SearchKey)
         {
             //objective: communicate with our restaurant's branches data api to retrieve a list of branches
             //curl https://localhost:44355/api/restaurantdata/listrestaurants
 
             string url = "listbranches";
+
+            if (!string.IsNullOrEmpty(SearchKey))
+            {
+                url += "?SearchKey=" + SearchKey;
+            }
+
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             //Debug.WriteLine("The response code is ");
@@ -169,7 +175,7 @@ namespace RestaurantTracker.Controllers
                 // Deserialize the response to get the created branch with its ID
                 var createdBranch = response.Content.ReadAsAsync<BranchDto>().Result;
                 // Redirect to the Details page of the newly created restaurant
-                return RedirectToAction("List");
+                return RedirectToAction("ListByRestaurant/"+Branch.RestaurantId);
             }
             else
             {
@@ -222,14 +228,20 @@ namespace RestaurantTracker.Controllers
             //objective: communicate with our restaurant branch data api to retrieve a list of branches based on the restaurant
             //curl https://localhost:44355/api/restaurantdata/listbyrestaurant
 
+            //Get all branches by id
             string url = "listbranchesbyrestaurant/"+ id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-
             //Debug.WriteLine("The response code is ");
             //Debug.WriteLine(response.StatusCode);
-
             IEnumerable<BranchDto> Branches = response.Content.ReadAsAsync<IEnumerable<BranchDto>>().Result;
+
+            //Get restaurant name from restaurant details based on id
+            string restUrl = "https://localhost:44355/api/restaurantdata/findrestaurant/" + id;
+            HttpResponseMessage nameResponse = client.GetAsync(restUrl).Result;
+            RestaurantDto Restaurant = nameResponse.Content.ReadAsAsync<RestaurantDto>().Result;
+
             ViewData["id"] = id;
+            ViewData["RestaurantName"] = Restaurant.RestaurantName;
             return View(Branches);
         }
 

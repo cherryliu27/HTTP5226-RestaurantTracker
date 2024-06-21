@@ -25,30 +25,54 @@ namespace RestaurantTracker.Controllers
 
         [HttpGet]
         [Route("api/BranchData/ListBranches")]
-        public IEnumerable<BranchDto> ListBranches()
+        public IEnumerable<BranchDto> ListBranches(string SearchKey = null)
 
         {
-            List<Branch> Branches = db.Branches.ToList();
-            List<BranchDto> BranchDtos = new List<BranchDto>();
+            IQueryable<Branch> branchesQuery = db.Branches.Include(x => x.Restaurant);
 
-            foreach (Branch Branch in Branches)
+            if (!string.IsNullOrEmpty(SearchKey))
             {
-                BranchDto BranchDto = new BranchDto();
-
-                BranchDto.BranchId = Branch.BranchId;
-                BranchDto.RestaurantId = Branch.RestaurantId;
-                BranchDto.Status = Branch.Status;
-                BranchDto.Review = Branch.Review;
-                BranchDto.Location = Branch.Location;
-                BranchDto.Address = Branch.Address;
-                BranchDto.Rating = Branch.Rating;
-                BranchDto.RestaurantName = Branch.Restaurant.RestaurantName;
-                BranchDto.RestaurantType = Branch.Restaurant.RestaurantType;
-                BranchDto.Cuisine = Branch.Restaurant.Cuisine;
-                BranchDto.Budget = Branch.Restaurant.Budget;
-
-                BranchDtos.Add(BranchDto);
+                branchesQuery = branchesQuery.Where(x => x.Restaurant.RestaurantName.Contains(SearchKey));
             }
+
+
+            //List<Branch> Branches = db.Branches.ToList();
+            //List<BranchDto> BranchDtos = new List<BranchDto>();
+
+            List<BranchDto> BranchDtos = branchesQuery.Select(x => new BranchDto
+            {
+                BranchId = x.BranchId,
+                RestaurantId = x.RestaurantId,
+                Status = x.Status,
+                Rating = x.Rating,
+                Review = x.Review,
+                Location = x.Location,
+                Address = x.Address,
+                RestaurantName = x.Restaurant.RestaurantName, 
+                RestaurantType = x.Restaurant.RestaurantType,
+                Cuisine = x.Restaurant.Cuisine,
+                Budget = x.Restaurant.Budget
+            
+            }).ToList();
+
+            //foreach (Branch Branch in Branches)
+            //{
+            //    BranchDto BranchDto = new BranchDto();
+
+            //    BranchDto.BranchId = Branch.BranchId;
+            //    BranchDto.RestaurantId = Branch.RestaurantId;
+            //    BranchDto.Status = Branch.Status;
+            //    BranchDto.Review = Branch.Review;
+            //    BranchDto.Location = Branch.Location;
+            //    BranchDto.Address = Branch.Address;
+            //    BranchDto.Rating = Branch.Rating;
+            //    BranchDto.RestaurantName = Branch.Restaurant.RestaurantName;
+            //    BranchDto.RestaurantType = Branch.Restaurant.RestaurantType;
+            //    BranchDto.Cuisine = Branch.Restaurant.Cuisine;
+            //    BranchDto.Budget = Branch.Restaurant.Budget;
+
+            //    BranchDtos.Add(BranchDto);
+            //}
             return BranchDtos;
         }
 

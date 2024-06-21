@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 using RestaurantTracker.Models;
 
 namespace RestaurantTracker.Controllers
@@ -23,19 +24,29 @@ namespace RestaurantTracker.Controllers
         }
 
         // GET: Restaurant/List
-        public ActionResult List()
+        [HttpGet]
+        public ActionResult List(string SearchKey)
         {
             //objective: communicate with our restaurant data api to retrieve a list of restaurants
             //curl https://localhost:44355/api/restaurantdata/listrestaurants
 
+
             string url = "listrestaurants";
+
+
+            if (!string.IsNullOrEmpty(SearchKey))
+            {
+                url += "?SearchKey=" + SearchKey;
+            }
+
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             //Debug.WriteLine("The response code is ");
             //Debug.WriteLine(response.StatusCode);
 
             IEnumerable<RestaurantDto> Restaurants = response.Content.ReadAsAsync<IEnumerable<RestaurantDto>>().Result;
-
+            //var json = response.Content.ReadAsStringAsync().Result;
+            //IEnumerable<RestaurantDto> Restaurants = JsonConvert.DeserializeObject<IEnumerable<RestaurantDto>>(json);
             return View(Restaurants);
         }
 
@@ -107,7 +118,7 @@ namespace RestaurantTracker.Controllers
                 content.Headers.ContentType.MediaType = "application/json";
 
                 Debug.WriteLine("Still good");
-            
+
 
                 //POST: api/RestaurantData/UpdateRestaurant/{id}
                 //Header : Content-Type: application/json

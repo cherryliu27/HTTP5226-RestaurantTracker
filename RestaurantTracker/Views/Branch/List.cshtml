@@ -3,11 +3,59 @@
     ViewBag.Title = "List";
 }
 
-<h2>List of Restaurant Branches</h2>
-<p><a href="/Restaurant/Add">Add New Restaurant</a></p>
-<p><a href="/Restaurant/List">View List of Restaurants</a></p>
+<h2>List of All Restaurant Branches</h2>
+@*<p><a href="/Restaurant/Add">Add New Restaurant</a></p>*@
+@*<p><a href="/Restaurant/List">View List of Restaurants</a></p>*@
 
-@foreach (var branch in Model)
+@*<form action="/Branch/List" method="GET">
+    <input type="text" name="SearchKey" placeholder="Search Restaurant Name" />
+    <button type="submit">Search</button>
+</form>*@
+
+
+<form style="margin-top:1rem;" class="form-inline search-bar" method="GET" action="/Branch/List">
+    <div class="input-group">
+        <input class="form-control" type="search" placeholder="Search Restaurant Name" aria-label="Search" name="SearchKey">
+        <div class="input-group-append" style="margin-left: 0.5rem">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
+
+
+<table class="table table-striped text-wrap" style="margin-top:2rem;">
+    <thead>
+        <tr>
+            <th scope="col" class="col-3">Restaurant Branch</th>
+            <th scope="col" class="col-1">Cuisine</th>
+            <th scope="col" class="col-1">Budget</th>
+            <th scope="col" class="col-1">Location</th>
+            <th scope="col" class="col-1">Status</th>
+            <th scope="col" class="col-2">Address</th>
+            <th scope="col" class="col-3">Review</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var branch in Model)
+        {
+            <tr>
+                <th class="col-3" scope="row"><a href="/Branch/Details/@branch.BranchId">@branch.RestaurantName (@branch.Location)</a></th>
+                <td class="col-1">@branch.Cuisine</td>
+                <td class="col-1">@branch.Budget</td>
+                <td class="col-1">@branch.Location</td>
+                <td class="col-1">@branch.Status</td>
+                <td class="col-2">@branch.Address</td>
+                <td class="col-3"> @branch.Review</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@*@foreach (var branch in Model)
 {
     <h3><a href="/Branch/Details/@branch.BranchId">@branch.RestaurantName (@branch.Location)</a></h3>
     <div>Restaurant ID: <a href="/Restaurant/Details/@branch.RestaurantId">@branch.RestaurantId</a></div>
@@ -16,5 +64,5 @@
     <div>Location: @branch.Location</div>
     <div>Address: @branch.Address</div>
 
-}
+}*@
 

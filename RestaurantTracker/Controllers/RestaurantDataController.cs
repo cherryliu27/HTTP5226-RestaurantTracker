@@ -26,12 +26,23 @@ namespace RestaurantTracker.Controllers
         /// </example>
         [HttpGet]
         [Route("api/RestaurantData/ListRestaurants")]
-        public IEnumerable<RestaurantDto> ListRestaurants()
+        public IEnumerable<RestaurantDto> ListRestaurants(string SearchKey = null)
         {
-            List<Restaurant> Restaurants = db.Restaurants.ToList();
-            List<RestaurantDto> RestaurantDtos = new List<RestaurantDto>(); 
+            List<Restaurant> Restaurants;
 
-            foreach(Restaurant Restaurant in Restaurants)
+            if (!string.IsNullOrEmpty(SearchKey))
+            {
+                Restaurants = db.Restaurants.Where(x => x.RestaurantName.Contains(SearchKey)).ToList();
+            }
+            else
+            {
+                Restaurants = db.Restaurants.ToList();
+
+            }
+
+            List<RestaurantDto> RestaurantDtos = new List<RestaurantDto>();
+
+            foreach (Restaurant Restaurant in Restaurants)
             {
                 RestaurantDto RestaurantDto = new RestaurantDto();
 
@@ -172,7 +183,52 @@ namespace RestaurantTracker.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Returns a list of restarurant and filters by restaurant name matching the search key
+        /// </summary>
+        /// <param name="SearchKey">User Search Key for restaurant names</param>
+        /// <returns>
+        /// returns a list of restaurants</returns>
+        /// <example>
+        /// GET: /api/RestaurantData/searchRestaurants/Miss  -> [{"RestaurantId": "1", "RestaurantName": "Miss Lin Cafe"}]
+        /// </example>
+        //[HttpGet]
+        //[Route("api/restaurantdata/searchrestaurant/{SearchKey?}")]
+        //public IEnumerable<RestaurantDto> SearchRestaurant(string SearchKey)
+        //{
+        //    List<Restaurant> Restaurants;
 
+        //    if (string.IsNullOrEmpty(SearchKey))
+        //    {
+        //        Restaurants = db.Restaurants.ToList();
+        //    }
+        //    else
+        //    {
+        //        Restaurants = db.Restaurants.Where(x => x.RestaurantName.Contains(SearchKey)).ToList();
+
+        //    }
+
+        //    List<RestaurantDto> RestaurantDtos = new List<RestaurantDto>();
+
+        //    foreach (Restaurant Restaurant in Restaurants)
+        //    {
+        //        RestaurantDto RestaurantDto = new RestaurantDto();
+
+
+        //        RestaurantDto.RestaurantId = Restaurant.RestaurantId;
+        //        RestaurantDto.RestaurantName = Restaurant.RestaurantName;
+        //        RestaurantDto.RestaurantType = Restaurant.RestaurantType;
+        //        RestaurantDto.Cuisine = Restaurant.Cuisine;
+        //        RestaurantDto.Budget = Restaurant.Budget;
+
+
+        //        RestaurantDtos.Add(RestaurantDto);
+        //    }
+        //    return RestaurantDtos;
+        //}
 
     }
+
+
+
 }
