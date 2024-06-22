@@ -7,17 +7,6 @@
 
 <h2 style="margin-top: 2rem;">@Model.RestaurantName</h2>
 
-
-@*<div class="card restaurant-details" style="width: 18rem; margin-top:1.5rem;">
-        <div class="card-header">
-            <strong>Restaurant Details</strong>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Restaurant Type:</strong> @Model.RestaurantType</li>
-            <li class="list-group-item"><strong>Cuisine:</strong> @Model.Cuisine</li>
-            <li class="list-group-item"><strong>Budget:</strong> $@Model.Budget</li>
-        </ul>
-    </div>*@
 <h5 style="margin-top:2rem; text-decoration:underline">Restaurant Details</h5>
 
 <div>
@@ -47,12 +36,3 @@
         <button type="submit" class="btn btn-outline-secondary">View @Model.RestaurantName Branches</button>
     </form>
 </div>
-
-@*<form method="POST" action="/Branch/Add/@Model.RestaurantId" id="branchForm">
-    <input type="hidden" name="RestaurantId" value="@Model.RestaurantId" />
-    <button type="submit">Add Branch</button>
-</form>
-<form method="POST" action="/Branch/ListByRestaurant/@Model.RestaurantId" id="listbranchForm">
-    <input type="hidden" name="RestaurantId" value="@Model.RestaurantId" />
-    <button type="submit">View All Branches</button>
-</form>*@

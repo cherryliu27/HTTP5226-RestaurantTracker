@@ -14,13 +14,17 @@ namespace RestaurantTracker.Controllers
     public class BranchDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
         /// <summary>
-        /// Returns a list of branches
+        /// Returns a list of restaurant branches 
         /// </summary>
-        /// <returns>An array of branches
+        /// <param name="SearchKey">User search key for restaurant name</param>
+        /// <returns>
+        /// Returns an array of branches that matches the Search Key (Restaurant Name). Will return complete list if no search key is input.
         /// </returns>
         /// <example>
         /// //GET: /api/BranchData/ListBranches -> [{"BranchId":"1", "Status": "Visited", "Rating": "4.00"}, {"BranchId":"2", "Status": "Not Visited", "Rating": "4.50"}]
+        /// //GET: /api/BranchData/ListBranches/Miss -> [{"BranchId":"1", "RestaurantName": "Miss Lin Cafe", "Status": "Visited", "Rating": "4.00"}]
         /// </example>
 
         [HttpGet]
@@ -50,25 +54,6 @@ namespace RestaurantTracker.Controllers
                 Budget = x.Restaurant.Budget
             
             }).ToList();
-
-            //foreach (Branch Branch in Branches)
-            //{
-            //    BranchDto BranchDto = new BranchDto();
-
-            //    BranchDto.BranchId = Branch.BranchId;
-            //    BranchDto.RestaurantId = Branch.RestaurantId;
-            //    BranchDto.Status = Branch.Status;
-            //    BranchDto.Review = Branch.Review;
-            //    BranchDto.Location = Branch.Location;
-            //    BranchDto.Address = Branch.Address;
-            //    BranchDto.Rating = Branch.Rating;
-            //    BranchDto.RestaurantName = Branch.Restaurant.RestaurantName;
-            //    BranchDto.RestaurantType = Branch.Restaurant.RestaurantType;
-            //    BranchDto.Cuisine = Branch.Restaurant.Cuisine;
-            //    BranchDto.Budget = Branch.Restaurant.Budget;
-
-            //    BranchDtos.Add(BranchDto);
-            //}
             return BranchDtos;
         }
 
@@ -108,7 +93,15 @@ namespace RestaurantTracker.Controllers
         }
 
 
-
+        /// <summary>
+        /// Updates details of an existing branch by branch id
+        /// </summary>
+        /// <param name="id">Branch ID</param>
+        /// <param name="Branch">Branch data to be updated</param>
+        /// <returns>
+        /// Nothing if successful
+        /// Bad Request or Not found if error is found
+        /// </returns>
         // POST: api/BranchData/UpdateBranch/2
         [ResponseType(typeof(void))]
         [HttpPost]
@@ -147,14 +140,25 @@ namespace RestaurantTracker.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        //check if restaurant exists
+
+        /// <summary>
+        /// To check if a branch exists
+        /// </summary>
+        /// <param name="id">Branch ID</param>
         private bool BranchExists(int id)
         {
             return db.Branches.Count(e => e.BranchId == id) > 0;
         }
 
 
-
+        /// <summary>
+        /// Adds branch to the database
+        /// </summary>
+        /// <param name="Branch">Branch data to be added to the database</param>
+        /// <returns>
+        /// Returns successful response if update is success.
+        /// Returns Bad Request is update is invalid
+        /// </returns>
 
         // POST: api/BranchData/AddBranch
         [ResponseType(typeof(Branch))]
@@ -206,6 +210,18 @@ namespace RestaurantTracker.Controllers
             return Ok();
         }
 
+
+
+        /// <summary>
+        /// Gets list of branches by Restaurant ID
+        /// </summary>
+        /// <param name="restaurantId">Restaurant ID</param>
+        /// <returns>
+        /// List of restaurant branches that matches the restaurant ID
+        /// </returns>
+        /// <example>
+        /// //GET: /api/BranchData/ListBranchesByRestaurant/1 -> [{"BranchId":"1", "RestaurantId": "1", "Status": "Visited", "Rating": "4.00"}, {"BranchId":"2", "RestaurantId": "1", "Status": "Not Visited", "Rating": "4.50"}]
+        /// </example>
         //Filtering
         // GET: api/BranchData/ListBranchesByRestaurant/1
         [HttpGet]

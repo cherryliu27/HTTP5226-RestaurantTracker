@@ -11,10 +11,6 @@
     <div style="display:none">
         <input type="text" name="RestaurantId" value="@Model.RestaurantId" />
     </div>
-    @*<div class="form-group">
-            <label for="status">Status: </label>
-            <input type="text" name="Status" class="form-control" id="status">
-        </div>*@
     <div class="form-group">
         <label for="status">Status:</label>
         <select name="Status" class="form-control" id="status">
@@ -24,7 +20,6 @@
     </div>
     <div class="form-group">
         <label for="review">Review:</label>
-        @*<input type="text" name="Review" class="form-control" id="type">*@
         <textarea class="form-control" id="review" rows="2"></textarea>
     </div>
     <div class="form-group">
@@ -40,32 +35,3 @@
     <a style="margin-left: 0.2rem;" href="/Restaurant/Details/@Model.RestaurantId" class="btn btn-outline-secondary" role="button">Cancel</a>
 </form>
 
-
-
-
-@*<form action="/Branch/Create" method="POST">
-    <div style="display:none">
-        <input type="text" name="RestaurantId" value="@Model.RestaurantId" />
-    </div>
-    <div>
-        <label for="status">Status: </label>
-        <input id="status" type="text" name="Status" />
-    </div>
-    <div>
-        <label for="review">Review: </label>
-        <input id="review" type="text" name="Review" />
-    </div>
-    <div>
-        <label for="location">Location: </label>
-        <input id="location" type="text" name="Location" />
-    </div>
-    <div>
-        <label for="address">Address: </label>
-        <input id="address" type="text" name="address" />
-    </div>
-    <div>
-        <input type="submit" value="Add Branch" />
-
-    </div>
-    <a href="/Restaurant/Details/@Model.RestaurantId">Back</a>
-</form>*@

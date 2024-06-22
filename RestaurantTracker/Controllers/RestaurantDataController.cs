@@ -19,7 +19,7 @@ namespace RestaurantTracker.Controllers
         /// Returns a list of restaurants in the system
         /// </summary>
         /// <returns>
-        /// An Array of restaurants
+        /// Returns an array of restaurants that matches the Search Key (Restaurant Name). Will return complete list if no search key is input.
         /// </returns>
         /// <example>
         /// //GET: /api/RestaurantData/ListRestaurants -> [{"RestaurantId": "1", "RestaurantName": "Miss Lin Cafe"}, {"RestaurantId": "2", "RestaurantName": "Daldongnae Korean BBQ"}]
@@ -87,6 +87,15 @@ namespace RestaurantTracker.Controllers
         }
 
 
+        /// <summary>
+        /// Updates information of an existing restaurant
+        /// </summary>
+        /// <param name="id">Restaurant Id</param>
+        /// <param name="Restaurant">Restarurant data to be updated</param>
+        /// <returns>
+        /// Returns no content if update is successful
+        /// Returns Bad Request/Not found along with the status code if update is invalid
+        /// </returns>
         // POST: api/RestaurantData/UpdateRestaurant/2
         [ResponseType(typeof(void))]
         [HttpPost]
@@ -132,6 +141,14 @@ namespace RestaurantTracker.Controllers
         }
 
 
+        /// <summary>
+        /// Adds restaurant to database
+        /// </summary>
+        /// <param name="Restaurant">Restaurant data to be added to database </param>
+        /// <returns>
+        /// Returns bad request if update is invalid
+        /// Returns success message if update is successful
+        /// </returns>
         // POST: api/RestaurantData/AddRestaurant
         [ResponseType(typeof(Restaurant))]
         [HttpPost]
@@ -182,50 +199,6 @@ namespace RestaurantTracker.Controllers
 
             return Ok();
         }
-
-        /// <summary>
-        /// Returns a list of restarurant and filters by restaurant name matching the search key
-        /// </summary>
-        /// <param name="SearchKey">User Search Key for restaurant names</param>
-        /// <returns>
-        /// returns a list of restaurants</returns>
-        /// <example>
-        /// GET: /api/RestaurantData/searchRestaurants/Miss  -> [{"RestaurantId": "1", "RestaurantName": "Miss Lin Cafe"}]
-        /// </example>
-        //[HttpGet]
-        //[Route("api/restaurantdata/searchrestaurant/{SearchKey?}")]
-        //public IEnumerable<RestaurantDto> SearchRestaurant(string SearchKey)
-        //{
-        //    List<Restaurant> Restaurants;
-
-        //    if (string.IsNullOrEmpty(SearchKey))
-        //    {
-        //        Restaurants = db.Restaurants.ToList();
-        //    }
-        //    else
-        //    {
-        //        Restaurants = db.Restaurants.Where(x => x.RestaurantName.Contains(SearchKey)).ToList();
-
-        //    }
-
-        //    List<RestaurantDto> RestaurantDtos = new List<RestaurantDto>();
-
-        //    foreach (Restaurant Restaurant in Restaurants)
-        //    {
-        //        RestaurantDto RestaurantDto = new RestaurantDto();
-
-
-        //        RestaurantDto.RestaurantId = Restaurant.RestaurantId;
-        //        RestaurantDto.RestaurantName = Restaurant.RestaurantName;
-        //        RestaurantDto.RestaurantType = Restaurant.RestaurantType;
-        //        RestaurantDto.Cuisine = Restaurant.Cuisine;
-        //        RestaurantDto.Budget = Restaurant.Budget;
-
-
-        //        RestaurantDtos.Add(RestaurantDto);
-        //    }
-        //    return RestaurantDtos;
-        //}
 
     }
 

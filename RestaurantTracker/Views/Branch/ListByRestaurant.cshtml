@@ -5,9 +5,6 @@
 
 <h2>List of @ViewData["RestaurantName"] Branches</h2>
 <a style="margin-top:1rem" href="/Restaurant/Details/@ViewData["id"]" class="btn btn-outline-secondary" role="button">Back to Restaurant Details</a>
-@*<p><a href="/Branch/Add/@ViewData["id"]">Add New Branch</a></p>
-    <p><a href="/Restaurant/List">View List of Restaurants</a></p>*@
-
 <table class="table table-striped  text-nowrap" style="margin-top:2rem;">
     <thead>
         <tr>
@@ -37,19 +34,3 @@
 </table>
 
 
-
-
-
-@*@foreach (var branch in Model)
-{
-    <h2><a href="/Branch/Details/@branch.BranchId">@branch.RestaurantName (@branch.Location)</a></h2>
-    <div>Restaurant ID: @branch.RestaurantId</div>
-    <div>Branch ID: @branch.BranchId</div>
-    <div>Status: @branch.Status</div>
-    <div>Review: @branch.Review</div>
-    <div>Location: @branch.Location</div>
-    <div>Address: @branch.Address</div>
-
-}*@
-
-@*<a href="/Restaurant/Details/@ViewData["id"]">Back</a>*@
