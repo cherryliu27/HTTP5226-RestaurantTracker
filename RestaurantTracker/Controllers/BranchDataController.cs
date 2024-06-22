@@ -35,10 +35,6 @@ namespace RestaurantTracker.Controllers
                 branchesQuery = branchesQuery.Where(x => x.Restaurant.RestaurantName.Contains(SearchKey));
             }
 
-
-            //List<Branch> Branches = db.Branches.ToList();
-            //List<BranchDto> BranchDtos = new List<BranchDto>();
-
             List<BranchDto> BranchDtos = branchesQuery.Select(x => new BranchDto
             {
                 BranchId = x.BranchId,
